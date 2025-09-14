@@ -1,0 +1,48 @@
+{% extends "travel_planner/base.html" %} {% load static %} {% block content %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'travel_planner/book.css' %}"
+/>
+<div class="heading">
+  <h1>Book Now</h1>
+</div>
+<section class="booking">
+  <h1 class="heading-title">Book Your Trip!</h1>
+  <form action="" method="post" class="book-form">
+    {% csrf_token %}
+    <div class="flex">
+      <div class="input-box">
+        <span>Phone:</span>
+        <input type="number" placeholder="enter your number" name="phone" />
+      </div>
+      <div class="input-box">
+        <span>Address:</span>
+        <input type="text" placeholder="enter your address" name="address" />
+      </div>
+      <div class="input-box">
+        <span>Where To:</span>
+        <select id="location" name="location" required>
+          <option value="" disabled selected>Select a location</option>
+          {% for package in packages %}
+          <option value="{{ package.id }}">{{ package.title }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="input-box">
+        <span>How Many:</span>
+        <input type="number" placeholder="number of guests" name="guests" />
+      </div>
+      <div class="input-box">
+        <span>Arrival Date:</span>
+        <input type="date" name="arrival" />
+      </div>
+      <div class="input-box">
+        <span>Leaving Date:</span>
+        <input type="date" name="leaving" />
+      </div>
+    </div>
+    <input type="submit" class="btn" name="send" />
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,244 @@
+@keyframes fadeIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+.home {
+  padding: 0;
+}
+
+.slide {
+  text-align: center;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover !important;
+  background-position: center !important;
+  min-height: 60rem;
+}
+
+.home .slide .content {
+  width: 85rem;
+  display: none;
+}
+
+.home .swiper-slide-active .content {
+  display: inline-block;
+}
+
+.home .slide .content span {
+  display: block;
+  font-size: 2.2rem;
+  color: #fff9;
+  padding-bottom: 1rem;
+  animation: fadeIn 0.2s linear backwards 0.2s;
+}
+
+.home .slide .content h3 {
+  font-size: 6vw;
+  color: white;
+  text-transform: uppercase;
+  line-height: 1;
+  text-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.3);
+  padding: 1rem 0;
+  animation: fadeIn 0.2s linear backwards 0.4s;
+}
+
+.home .slide .content .btn {
+  animation: fadeIn 0.2s linear backwards 0.4s;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  top: inherit;
+  left: inherit;
+  bottom: 0;
+  right: 0;
+  height: 7rem;
+  width: 7rem;
+  background: white;
+  color: #222;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: #007bff;
+  color: white;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 2rem;
+}
+
+.home .swiper-button-prev {
+  right: 7rem;
+}
+
+.slide1 {
+  background-image: url(../travel_planner/images/travel-image4.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.slide2 {
+  background-image: url(../travel_planner/images/travel-image2.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.slide3 {
+  background-image: url(../travel_planner/images/travel-image3.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.btn {
+  margin-top: 1rem;
+  display: inline-block;
+  background: #222;
+  color: white;
+  font-size: 1.7rem;
+  padding: 1rem 3rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #007bff;
+}
+
+.heading-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 6rem;
+  text-transform: uppercase;
+  color: #222;
+}
+
+.services .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.5rem;
+}
+
+.services .box-container .box {
+  padding: 3rem 2rem;
+  text-align: center;
+  background: #007bff;
+  cursor: pointer;
+}
+
+.services .box-container .box:hover {
+  background: #222;
+}
+
+.services .box-container .box h3 {
+  color: #fff;
+  font-size: 1.7rem;
+  padding-top: 1rem;
+}
+
+.home-about {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.about-logo {
+  color: #007bff;
+}
+
+.about-image {
+  flex: 1 1 41rem;
+
+}
+
+.about-image img {
+  width: 100%;
+}
+
+.about-content {
+  flex: 1 1 41rem;
+  padding: 3rem;
+  background: #eee;
+}
+
+.about-content h3 {
+  font-size: 3rem;
+  color: #222;
+}
+
+.about-content p {
+  font-size: 1.5rem;
+  padding: 1em 0;
+  line-height: 2;
+  color: #222;
+}
+
+.home-packages {
+  background: #eee;
+}
+
+.home-packages .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 2rem;
+}
+
+.home-packages .box-container .box {
+  border: 0.1rem solid #222;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  background: white;
+}
+
+.packages-image {
+  height: 25rem;
+  overflow: hidden;
+}
+
+.packages-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: 0.2s linear;
+}
+
+.packages-content {
+  padding: 2rem;
+  text-align: center;
+}
+
+.packages-content h3 {
+  font-size: 2.5rem;
+  color: #222;
+}
+
+.packages-content p{
+  font-size: 1.5rem;
+  color: #777;
+  line-height: 2;
+  padding: 1rem 0;
+}
+
+.home-packages .load-more {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+@media (max-width: 991px) {
+  .home .slide .content h3 {
+    font-size: 10vw;
+  }
+}
+
+@media (max-width: 450px) {
+  .heading-title {
+    font-size: 3.5rem;
+  }
+}

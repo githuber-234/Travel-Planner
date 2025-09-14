@@ -1,0 +1,45 @@
+{% extends "travel_planner/base.html" %} {% load static %} {% block content %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'travel_planner/contact.css' %}"
+/>
+<div class="heading">
+  <h1>contact</h1>
+</div>
+<section class="contact">
+  <h1 class="heading-title">contact us</h1>
+  <div class="flex">
+    <div class="left">
+      <form action="" method="post" class="book-form">
+        {% csrf_token %}
+        <div class="input-box">
+          <span>Name:</span>
+          <input type="text" placeholder="Enter your name" name="name" />
+        </div>
+        <div class="input-box">
+          <span>Email:</span>
+          <input type="email" placeholder="Enter your email" name="email" />
+        </div>
+        <div class="input-box">
+          <span>Message:</span>
+          <textarea
+            id="message"
+            name="message"
+            maxlength="80"
+            placeholder="Write your message here..."
+            required
+          ></textarea>
+        </div>
+        <input type="submit" class="btn" name="send" />
+      </form>
+    </div>
+    <div class="right">
+      <a href="#"> <i class="fas fa-phone"></i> +234 806-841-9918</a>
+      <a href="#"> <i class="fas fa-envelope"></i> adrianegbuna@gmail.com</a>
+      <a href="#"> <i class="fas fa-map"></i> Abuja, Nigeria</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

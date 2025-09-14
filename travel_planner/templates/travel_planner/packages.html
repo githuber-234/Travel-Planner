@@ -1,0 +1,32 @@
+{% extends "travel_planner/base.html" %} {% load static %} {% block content %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'travel_planner/packages.css' %}"
+/>
+
+<div class="heading">
+  <h1>packages</h1>
+</div>
+<section class="packages">
+  <h1 class="heading-title">our packages</h1>
+  <div class="box-container">
+    {% for package in packages %}
+    <div class="box">
+      <div class="image">
+        <img
+          src="{{ package.image.url }}"
+          alt=""
+        />
+      </div>
+      <div class="content">
+        <h3>{{ package.title }}</h3>
+        <p>{{ package.description }}</p>
+        <a href="{% url 'book' %}" class="btn">book now</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

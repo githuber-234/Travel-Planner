@@ -1,0 +1,89 @@
+{% extends "travel_planner/base.html" %} {% load static %} {% block content %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'users/profile.css' %}"
+/>
+<div class="patient-profile">
+  <div class="patient-profile-left">
+    <h2>PROFILE</h2>
+    <div class="profile-upload-container">
+      {% if request.user.profile_picture %}
+        <img
+          src="{{ request.user.profile_picture.url }}"
+          class="profile-image"
+          alt="Profile Picture"
+        />
+        {% endif %}
+    </div>
+  </div>
+  <div class="patient-profile-right">
+    <h2>PERSONAL INFORMATION</h2>
+    <div class="personal-information">
+      <div class="personal-information-left">
+        <div class="personal-information-left-content">
+          <h4>USERNAME</h4>
+          <span>{{ user.username }}</span>
+        </div>
+      </div>
+      <div class="personal-information-middle">
+
+        <div class="personal-information-middle-content">
+          <h4>FIRST NAME</h4>
+          <span>{{ user.first_name }}</span>
+        </div>
+      </div>
+      <div class="personal-information-right">
+        <div class="personal-information-right-content">
+          <h4>EMAIL</h4>
+          <span>{{ user.email }}</span>
+        </div>
+      </div>
+      <button onclick="openProfilePopup()" class="create-profile-btn">
+        Edit Profile
+      </button>
+    </div>
+  </div>
+</div>
+<div id="profileModal" class="profile-modal">
+  <div class="profile-modal-content">
+    <span class="close" onclick="closeProfilePopup()">&times;</span>
+    <h2>Create Profile</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="profile-modal-grid">
+        <div>
+          <label>Full Name</label>
+          <input
+            type="text"
+            name="full_name"
+            placeholder="First Name"
+            required
+          />
+        </div>
+        <div>
+          <label>Email</label>
+          <input type="email" name="email" placeholder="Email" required />
+        </div>
+      </div>
+      <button type="submit" class="save-btn">Save Profile</button>
+    </form>
+  </div>
+</div>
+<script>
+  function openProfilePopup() {
+    document.getElementById("profileModal").style.display = "flex";
+  }
+  function closeProfilePopup() {
+    document.getElementById("profileModal").style.display = "none";
+  }
+
+  // Optional: Close on outside click
+  window.onclick = function (event) {
+    const modal = document.getElementById("profileModal");
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+</script>
+{% endblock %}
