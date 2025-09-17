@@ -1,0 +1,79 @@
+{% extends "travel_planner/base.html" %} {% load static %} {% block content %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'travel_planner/map.css' %}"
+/>
+
+<div class="heading">
+  <h1>Map</h1>
+</div>
+<section class="booking">
+  <form method="post">
+    {% csrf_token %}
+    <div class="flex">
+      <div class="input-box">
+        <span>Address</span>
+        {{ form.address }}
+      </div>
+    </div>
+    <div class="flex">
+      <div class="input-box">
+        <span>Destination</span>
+        {{ form.destination }}
+      </div>
+    </div>
+
+    <!-- First button: preview on map -->
+    <button type="submit" name="show_map" class="btn">Show on Map</button>
+
+    <!-- Second button: save -->
+    <button type="submit" name="confirm" class="btn">Confirm Booking</button>
+  </form>
+
+  <div id="map" style="height: 500px; margin-top: 20px"></div>
+
+  {{ user_coords|json_script:"user-coords" }} 
+  {{ dest_coords|json_script:"dest-coords" }}
+</section>
+
+<script>
+  var map = L.map("map", {
+    center: [9.082, 8.6753], // Nigeria's approximate center
+    zoom: 6,
+    maxBounds: [
+      [4.272, 2.676], // Southwest corner (approx Nigeria)
+      [13.8659, 14.678], // Northeast corner (approx Nigeria)
+    ],
+    maxBoundsViscosity: 1.0, // keeps user strictly within bounds
+  });
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+  }).addTo(map);
+
+  // Parse safely only if the script tag exists
+  const userEl = document.getElementById("user-coords");
+  const destEl = document.getElementById("dest-coords");
+
+  const userCoords = userEl ? JSON.parse(userEl.textContent) : null;
+  const destCoords = destEl ? JSON.parse(destEl.textContent) : null;
+  const destName = "{{ dest_name|default:''|escapejs }}";
+
+  if (userCoords && destCoords) {
+    const userMarker = L.marker(userCoords)
+      .addTo(map)
+      .bindPopup("Your Address")
+      .openPopup();
+
+    const destMarker = L.marker(destCoords).addTo(map).bindPopup(destName);
+
+    const polyline = L.polyline([userCoords, destCoords], {
+      color: "blue",
+    }).addTo(map);
+
+    map.fitBounds(polyline.getBounds());
+  }
+</script>
+
+{% endblock %}

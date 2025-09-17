@@ -30,6 +30,8 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
     />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   </head>
   <body>
@@ -40,7 +42,7 @@
       <nav class="navbar">
         <a href="{% url 'home' %}" class="navbar-link">Home</a>
         <a href="{% url 'packages' %}" class="navbar-link">Packages</a>
-        <a href="{% url 'book' %}" class="navbar-link">Book</a>
+        <a href="{% url 'map' %}" class="navbar-link">Map</a>
         <a href="{% url 'contact' %}" class="navbar-link">Contact</a>
         {% if user.is_authenticated %}
         <a href="{% url 'profile' %}" class="navbar-link">Profile</a>

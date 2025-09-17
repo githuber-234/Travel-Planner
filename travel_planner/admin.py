@@ -4,8 +4,7 @@ from .models import Booking, Packages
 
 @admin.register(Booking)
 class AssessmentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'email', 'phone', 'address',
-                    'location', 'guests', 'arrival', 'leaving')
+    list_display = ('id', 'user', 'address', 'destination')
     
 @admin.register(Packages)
 class AssessmentAdmin(admin.ModelAdmin):
