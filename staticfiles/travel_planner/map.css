@@ -1,0 +1,85 @@
+.heading {
+  background-image: url(../travel_planner/images/travel-image4.jpg);
+  background-size: cover !important;
+  background-position: center !important;
+  padding-top: 10rem;
+  padding-bottom: 15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heading h1 {
+  font-size: 10rem;
+  text-transform: uppercase;
+  color: white;
+  text-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.3);
+}
+
+.heading-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 6rem;
+  text-transform: uppercase;
+  color: #222;
+}
+
+.booking form {
+    padding: 2rem;
+    background: #eee;
+}
+
+.booking form .flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.booking form .flex .input-box {
+    flex: 1 1 41rem;
+}
+
+.booking form .flex .input-box input,
+.booking form .flex .input-box select {
+    width: 100%;
+    padding: 1.2rem 1.4rem;
+    font-size: 1.6rem;
+    color: #777;
+    text-transform: none;
+    margin-top: 1.5rem;
+    border: 0.1rem solid #222;
+}
+
+.booking form .flex .input-box input:focus,
+.booking form .flex .input-box select:focus {
+    background: #222;
+    color: white;
+}
+
+.booking form .flex .input-box input:focus::placeholder {
+    background: #222;
+    color: #fff9;
+}
+
+.booking form .flex .input-box span {
+    font-size: 1.5rem;
+    color: #222;
+}
+
+.book-form .btn {
+    margin-top: 2rem;
+}
+
+.btn {
+  margin-top: 1rem;
+  display: inline-block;
+  background: #222;
+  color: white;
+  font-size: 1.7rem;
+  padding: 1rem 3rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #007bff;
+}
