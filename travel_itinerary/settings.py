@@ -20,7 +20,7 @@ SECRET_KEY = config("SK")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['travelmate.onrender.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['travel-itinerary-yfi6.onrender.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -134,4 +134,5 @@ EMAIL_USE_TLS = False
 
 EMAIL_HOST_USER = config("EADDRESS")
 EMAIL_HOST_PASSWORD = config("EPASSWORD")
+
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
