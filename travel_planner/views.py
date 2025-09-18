@@ -8,6 +8,7 @@ from django.conf import settings
 from .forms import BookingForm
 from django.urls import reverse
 from .models import Booking
+from django.http import HttpResponse
 
 STATE_COORDS = {
     "Abia": [5.5320, 7.4860],
@@ -158,7 +159,7 @@ def approve_booking(request, token):
     )
 
     messages.success(request, "Booking approved and user notified.")
-    return redirect("map")
+    return HttpResponse("Booking approved successfully!")
 
 def reject_booking(request, token):
     booking = get_object_or_404(Booking, approval_token=token)
@@ -174,5 +175,7 @@ def reject_booking(request, token):
     )
 
     messages.warning(request, "Booking rejected and user notified.")
-    return redirect("map")
+    return HttpResponse("Booking rejected successfully!")
+
+
 
