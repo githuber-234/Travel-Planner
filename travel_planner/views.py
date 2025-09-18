@@ -158,7 +158,7 @@ def approve_booking(request, token):
     )
 
     messages.success(request, "Booking approved and user notified.")
-    return redirect("map_view")
+    return redirect("map")
 
 def reject_booking(request, token):
     booking = get_object_or_404(Booking, approval_token=token)
@@ -174,4 +174,5 @@ def reject_booking(request, token):
     )
 
     messages.warning(request, "Booking rejected and user notified.")
-    return redirect("map_view")
+    return redirect("map")
+
