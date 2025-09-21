@@ -36,16 +36,3 @@ def user_login(request):
         form = AuthenticationForm()
 
     return render(request, 'users/login.html', {'form': form})
-
-@login_required
-def profile(request):
-    if request.method == 'POST':
-        request.user.first_name = request.POST.get('full_name')
-        request.user.email = request.POST.get('email')
-        request.user.phone = request.POST.get('phone')
-        request.user.save()
-
-        messages.success(request, "Profile updated successfully!")
-        return redirect('profile')
-
-    return render(request, 'users/profile.html')

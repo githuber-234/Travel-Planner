@@ -4,7 +4,11 @@
   type="text/css"
   href="{% static 'travel_planner/map.css' %}"
 />
-
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <div class="heading">
   <h1>Map</h1>
 </div>
@@ -33,8 +37,7 @@
 
   <div id="map" style="height: 500px; margin-top: 20px"></div>
 
-  {{ user_coords|json_script:"user-coords" }} 
-  {{ dest_coords|json_script:"dest-coords" }}
+  {{ user_coords|json_script:"user-coords" }} {{ dest_coords|json_script:"dest-coords" }}
 </section>
 
 <script>
@@ -48,9 +51,15 @@
     maxBoundsViscosity: 1.0, // keeps user strictly within bounds
   });
 
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-  }).addTo(map);
+  L.tileLayer(
+    "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+    {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
+      subdomains: "abcd",
+      maxZoom: 20,
+    }
+  ).addTo(map);
 
   // Parse safely only if the script tag exists
   const userEl = document.getElementById("user-coords");

@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView, ListView, View
+from django.views.generic import ListView, View, TemplateView
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -6,7 +6,7 @@ from .models import Packages
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import BookingForm
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from .models import Booking
 from django.http import HttpResponse
 
@@ -51,14 +51,45 @@ STATE_COORDS = {
 }
 
 
-class HomeView(LoginRequiredMixin, TemplateView):
-    template_name = 'travel_planner/home.html'
-
-
-class PackagesView(LoginRequiredMixin, ListView):
+class HomeView(LoginRequiredMixin, ListView):
     model = Packages
-    template_name = 'travel_planner/packages.html'
-    context_object_name = 'packages'
+    template_name = 'travel_planner/home.html'
+    context_object_name = "packages"
+
+
+class BookView(LoginRequiredMixin, View):
+    template_name = "travel_planner/book.html"
+    success_url = reverse_lazy("booking-success")
+
+    def get(self, request):
+        # Render booking form
+        return render(request, self.template_name)
+    
+    def get(self, request):
+        packages = Packages.objects.all()
+        return render(request, self.template_name, {"packages": packages})
+
+    def post(self, request):
+        # Get form values
+        email = request.POST.get("email")
+        phone = request.POST.get("phone")
+        address = request.POST.get("address")
+        destination = request.POST.get("destination")
+
+        # Save booking (no confirmation flag)
+        Booking.objects.create(
+            user=request.user,
+            phone=phone,
+            email=email,
+            address=address,
+            destination=destination
+        )
+
+        return redirect(self.success_url)
+    
+class BookingSuccessView(LoginRequiredMixin, TemplateView):
+    template_name = 'travel_planner/booking-success.html'
+
 
 def map_view(request):
     user_coords = None
