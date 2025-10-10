@@ -4,17 +4,13 @@
   type="text/css"
   href="{% static 'travel_planner/booking-success.css' %}"
 />
- <style>
-
-
-  </style>
-</head>
-<body>
-  <div class="success-card">
-    <div class="success-icon">✔</div>
-    <h1 class="success-header">Booking Successful!</h1>
-    <p>Your booking has been Sent. Wait for a confirmation message via your Email! 🎉</p>
-    <a href="{% url 'home' %}" class="btn">Go to Homepage</a>
-  </div>
-</body>
-</html>
+<div class="success-card">
+  <div class="success-icon">✔</div>
+  <h1 class="success-header">Booking Successful!</h1>
+  <p>
+    Your booking has been Sent. Wait for a confirmation message via your Email!
+    🎉
+  </p>
+  <a href="{% url 'home' %}" class="btn">Go to Homepage</a>
+</div>
+{% endblock %}

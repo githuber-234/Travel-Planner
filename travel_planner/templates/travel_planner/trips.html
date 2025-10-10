@@ -1,0 +1,47 @@
+{% extends "travel_planner/base.html" %} {% load static %} {% block content %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'travel_planner/trips.css' %}"
+/>
+<div class="heading">
+  <h1>Trips</h1>
+</div>
+<section class="trips">
+  <h1 class="heading-title">Here are your current trips!</h1>
+  <div class="table-wrap">
+    <table class="bookings-table" role="table" aria-label="Your bookings">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>Destination</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for booking in bookings %}
+        <tr>
+          <td data-label="User">{{ booking.user }}</td>
+          <td data-label="Email">{{ user.email }}</td>
+          <td data-label="Address">{{ booking.address }}</td>
+          <td data-label="Destination">{{ booking.destination }}</td>
+          <td data-label="Status">
+            <span class="status-badge status-{{ booking.status|lower }}">
+              {{ booking.get_status_display }}
+            </span>
+          </td>
+          <td data-label="print"><a href="{% url 'download_report' booking.id %}">Download</a></td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="7" class="empty">You have no bookings yet.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

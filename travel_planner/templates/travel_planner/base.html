@@ -41,6 +41,7 @@
         <a href="{% url 'home' %}" class="navbar-link">Home</a>
         <a href="{% url 'book' %}" class="navbar-link">Book</a>
         <a href="{% url 'map' %}" class="navbar-link">Map</a>
+        <a href="{% url 'trips' %}" class="navbar-link">Trips</a>
         <a href="{% url 'contact' %}" class="navbar-link">Contact</a>
         {% if user.is_authenticated %}
         <form action="{% url 'logout' %}" method="post">

@@ -11,8 +11,6 @@ class Booking(models.Model):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     email = models.EmailField(null=True)
-    phone = models.CharField(max_length=20, null=True)
-
     address = models.CharField(max_length=255)
     destination = models.CharField(max_length=255)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="pending")

@@ -17,16 +17,12 @@
         <input type="email" placeholder="Enter your email" name="email" />
       </div>
       <div class="input-box">
-        <span>Phone:</span>
-        <input type="number" placeholder="Enter your number" name="phone" />
-      </div>
-      <div class="input-box">
         <span>Address:</span>
         <input type="text" placeholder="Enter your address" name="address" />
       </div>
       <div class="input-box">
         <span>Where To:</span>
-        <select id="location" name="location" required>
+        <select id="destination" name="destination" required>
           <option value="" disabled selected>Select a location</option>
           {% for package in packages %}
           <option value="{{ package.id }}">{{ package.title }}</option>

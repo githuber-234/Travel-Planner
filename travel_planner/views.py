@@ -9,6 +9,9 @@ from .forms import BookingForm
 from django.urls import reverse, reverse_lazy
 from .models import Booking
 from django.http import HttpResponse
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 
 STATE_COORDS = {
     "Abia": [5.5320, 7.4860],
@@ -72,19 +75,16 @@ class BookView(LoginRequiredMixin, View):
     def post(self, request):
         # Get form values
         email = request.POST.get("email")
-        phone = request.POST.get("phone")
         address = request.POST.get("address")
         destination = request.POST.get("destination")
 
         # Save booking (no confirmation flag)
         Booking.objects.create(
             user=request.user,
-            phone=phone,
             email=email,
             address=address,
             destination=destination
         )
-
         return redirect(self.success_url)
     
 class BookingSuccessView(LoginRequiredMixin, TemplateView):
@@ -208,5 +208,34 @@ def reject_booking(request, token):
     messages.warning(request, "Booking rejected and user notified.")
     return HttpResponse("Booking rejected successfully!")
 
+class TripsView(LoginRequiredMixin, TemplateView):
+    template_name = 'travel_planner/trips.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['bookings'] = Booking.objects.filter(
+            user=self.request.user
+        )
+        return context
+    
+def download_report(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id)
+    user = booking.user
 
+    template_path = 'travel_planner/download.html'
+    context = {
+        'booking': booking,
+        'user': user,
+    }
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="trip_ticket_{booking.id}.pdf"'
+
+    template = get_template(template_path)
+    html = template.render(context)
+
+    pisa_status = pisa.CreatePDF(html, dest=response)
+
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response

@@ -50,7 +50,6 @@ class BookingForm(forms.ModelForm):
         choices=NIGERIAN_STATES,
         widget=forms.Select(attrs={"class": "form-control"})
     )
-
     class Meta:
         model = Booking
         fields = ["address", "destination"]
